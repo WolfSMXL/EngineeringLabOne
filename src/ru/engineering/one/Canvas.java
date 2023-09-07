@@ -12,6 +12,7 @@ public class Canvas extends JPanel {
     public void paint (Graphics q) {
         super.paint(q);
         snake.paint(q);
+        food.paint(q);
         if (gameOver) {
             q.setColor(Color.red);
             q.setFont(new Font("Arial", Font.BOLD, 38));

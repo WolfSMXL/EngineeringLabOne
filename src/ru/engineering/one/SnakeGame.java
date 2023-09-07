@@ -7,12 +7,10 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 
 public class SnakeGame {
-
-    //game constants
-    final String TITLE_OF_PROGRAM = "Classic Game Snake";
-    static final int POINT_RADIUS = 20; // in pix
-    static final int FILLED_WIDTH = 30; //in point
-    static final int FILLED_HEIGHT = 20; // in point
+    static final String TITLE_OF_PROGRAM = "Змейка";
+    static final int POINT_RADIUS = 20;
+    static final int FILLED_WIDTH = 30;
+    static final int FILLED_HEIGHT = 20;
     final int FILLED_DX = 6;
     static final int FILLED_DY = 28;
     static final int LEFT = 37;
@@ -20,6 +18,7 @@ public class SnakeGame {
     static final int RIGHT = 39;
     static final int DOWN = 40;
     static Snake snake;
+    static Food food;
     static JFrame frame;
     static Canvas canvasPanel;
     static Random random = new Random();
@@ -55,9 +54,13 @@ public class SnakeGame {
         frame.setVisible(true);
 
         snake = new Snake(START_SNAKE_X, START_SNAKE_Y, START_SNAKE_SIZE, START_DIRECTION);
+        food = new Food();
 
         while(!gameOver) {
             snake.move();
+            if(food.isEaten()){
+                food.next();
+            }
             canvasPanel.repaint();
             try {
                 Thread.sleep(SHOW_DEALAY);

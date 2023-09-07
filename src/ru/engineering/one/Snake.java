@@ -2,13 +2,11 @@ package ru.engineering.one;
 
 import java.awt.*;
 import java.util.ArrayList;
-
 import static ru.engineering.one.SnakeGame.*;
 
 public  class Snake {
-    ArrayList<Point> snake = new ArrayList<Point>();
+    ArrayList<Point> snake = new ArrayList<>();
     int direction;
-    final String TITLE_OF_PROGRAM = "Classic Game Snake";
 
     public Snake(int x, int y, int length, int direction){
         for(int i = 0; i<length; i++){
@@ -40,8 +38,14 @@ public  class Snake {
         if(x < 0){x = FILLED_WIDTH-1;}
         if(y > FILLED_WIDTH - 1){y=0;}
         if(y < 0){y = FILLED_HEIGHT-1;}
-        gameOver = isInsideSnake(x,y);//check for cross itselves
+        gameOver = isInsideSnake(x,y);
         snake.add(0, new Point(x,y));
+        if(isFood(food)) {
+            food.eat();
+            frame.setTitle(TITLE_OF_PROGRAM + " : " + snake.size());
+        }else{
+            snake.remove(snake.size()-1);
+        }
     }
 
     void setDirection(int direction){
