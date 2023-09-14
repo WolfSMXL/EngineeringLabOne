@@ -34,11 +34,12 @@ public class SnakeGame {
     public static void main(String[] args) {
         new SnakeGame().go();
     }
-    void go(){
+
+    void go() {
         frame = new JFrame(TITLE_OF_PROGRAM + " : " + START_SNAKE_SIZE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(FILLED_WIDTH * POINT_RADIUS + FILLED_DX, FILLED_HEIGHT * POINT_RADIUS + FILLED_DY);
-        frame.setLocation(START_LOCATION,START_LOCATION);
+        frame.setLocation(START_LOCATION, START_LOCATION);
         frame.setResizable(false);
 
         canvasPanel = new Canvas();
@@ -56,10 +57,11 @@ public class SnakeGame {
         snake = new Snake(START_SNAKE_X, START_SNAKE_Y, START_SNAKE_SIZE, START_DIRECTION);
         food = new Food();
 
-        while(!gameOver) {
+        while (!gameOver) {
             snake.move();
-            if(food.isEaten()){
+            if (food.isEaten()) {
                 food.next();
+                food.changeColor();
             }
             canvasPanel.repaint();
             try {
